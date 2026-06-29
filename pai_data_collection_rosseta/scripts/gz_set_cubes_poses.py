@@ -6,21 +6,21 @@ It shells out to ``gz service`` to set the pose of the three cubes defined in
 
 Usage:
     # Reset to the hardcoded nominal pose.
-    python pai_data_collection/scripts/gz_set_cubes_poses.py
+    python pai_data_collection_rosseta/scripts/gz_set_cubes_poses.py
 
     # Randomize around the nominal pose.
-    python pai_data_collection/scripts/gz_set_cubes_poses.py --random
+    python pai_data_collection_rosseta/scripts/gz_set_cubes_poses.py --random
 
     # Custom randomization range and seed.
-    python pai_data_collection/scripts/gz_set_cubes_poses.py --random \\
+    python pai_data_collection_rosseta/scripts/gz_set_cubes_poses.py --random \\
         --radius 0.05 --angle-range 180 --seed 0
 
     # Override the nominal pose of one cube.
-    python pai_data_collection/scripts/gz_set_cubes_poses.py \\
+    python pai_data_collection_rosseta/scripts/gz_set_cubes_poses.py \\
         --pose cube_small=0.16,-0.11,0.41,0,0,0,1
 
     # Print the gz commands without executing them.
-    python pai_data_collection/scripts/gz_set_cubes_poses.py --dry-run
+    python pai_data_collection_rosseta/scripts/gz_set_cubes_poses.py --dry-run
 """
 
 from __future__ import annotations

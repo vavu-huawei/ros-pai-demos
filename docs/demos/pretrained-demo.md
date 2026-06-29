@@ -42,7 +42,7 @@ The LeRobot dataset contains:
 - 1 task: `place cubes on tray`
 - Robot type: `so_arm101`
 - License: `apache-2.0`
-- Features (matching the [SO-ARM101 contract](../../pai_data_collection/config/rosetta/so_arm101.yaml)):
+- Features (matching the [SO-ARM101 contract](../../pai_data_collection_rosseta/config/rosetta/so_arm101.yaml)):
 
   | Feature                     | Type    | Shape     | Notes                                               |
   | --------------------------- | ------- | --------- | --------------------------------------------------- |
@@ -116,7 +116,7 @@ pixi shell
 
 ```bash
 ros2 launch rosetta rosetta_client_launch.py \
-    contract_path:=$(ros2 pkg prefix pai_data_collection)/share/pai_data_collection/config/rosetta/so_arm101.yaml \
+    contract_path:=$(ros2 pkg prefix pai_data_collection_rosseta)/share/pai_data_collection_rosseta/config/rosetta/so_arm101.yaml \
     pretrained_name_or_path:=francocipollone/rospai_act_sim_arm101_place_cubes_on_tray \
     policy_type:=act \
     policy_device:=cuda \
@@ -156,14 +156,14 @@ The arm should start reaching for the cubes and placing them onto the tray. Infe
 
 ## Reset the Cubes and Run Again
 
-Once the cubes are placed, the scene stays as-is. To run the policy again, reset the cubes' positions using the [`gz_set_cubes_poses.py`](../../pai_data_collection/README.md#workflow) helper:
+Once the cubes are placed, the scene stays as-is. To run the policy again, reset the cubes' positions using the [`gz_set_cubes_poses.py`](../../pai_data_collection_rosseta/README.md#workflow) helper:
 
 ```bash
 # Reset to the nominal starting layout.
-pixi run ./pai_data_collection/scripts/gz_set_cubes_poses.py
+pixi run ./pai_data_collection_rosseta/scripts/gz_set_cubes_poses.py
 
 # Or randomize the cube poses within a small region around the nominal.
-pixi run ./pai_data_collection/scripts/gz_set_cubes_poses.py --random
+pixi run ./pai_data_collection_rosseta/scripts/gz_set_cubes_poses.py --random
 ```
 
 > [!TIP]

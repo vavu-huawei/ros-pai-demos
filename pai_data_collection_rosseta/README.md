@@ -1,4 +1,4 @@
-# pai_data_collection
+# pai_data_collection_rosseta
 
 Data collection tools for Physical AI demos using [rosetta](https://github.com/iblnkn/rosetta).
 
@@ -39,7 +39,7 @@ pixi run so-arm-gz # ros2 launch pai_bringup so_arm_gz_bringup.launch.py
 
 ```bash
 ros2 launch rosetta episode_recorder_launch.py \
-    contract_path:=$(ros2 pkg prefix pai_data_collection)/share/pai_data_collection/config/rosetta/so_arm101.yaml \
+    contract_path:=$(ros2 pkg prefix pai_data_collection_rosseta)/share/pai_data_collection_rosseta/config/rosetta/so_arm101.yaml \
     bag_base_dir:=datasets/so_arm101/bags
 ```
 
@@ -57,10 +57,10 @@ The cubes do not snap back to their starting poses when an episode ends, so rese
 
 ```bash
 # Reset to the nominal layout (matches the starting layout in so_arm_table.sdf)
-$(ros2 pkg prefix pai_data_collection)/share/pai_data_collection/scripts/gz_set_cubes_poses.py
+$(ros2 pkg prefix pai_data_collection_rosseta)/share/pai_data_collection_rosseta/scripts/gz_set_cubes_poses.py
 
 # Or randomize the pose of each cube within a small region around the nominal
-$(ros2 pkg prefix pai_data_collection)/share/pai_data_collection/scripts/gz_set_cubes_poses.py --random --seed 1
+$(ros2 pkg prefix pai_data_collection_rosseta)/share/pai_data_collection_rosseta/scripts/gz_set_cubes_poses.py --random --seed 1
 ```
 
 Run with `--help` to see all options (`--radius`, `--angle-range`, `--pose NAME=...` overrides, `--dry-run`).
@@ -80,7 +80,7 @@ ros2 topic pub /forward_position_controller/commands std_msgs/msg/Float64MultiAr
 There is simple script to run some of these commands sequentially:
 
 ```bash
-$(ros2 pkg prefix pai_data_collection)/share/pai_data_collection/scripts/arm_demo_positions.sh
+$(ros2 pkg prefix pai_data_collection_rosseta)/share/pai_data_collection_rosseta/scripts/arm_demo_positions.sh
 ```
 
 7. Finish episode: Press `s` (or `←`) to stop and save, or `d` to discard.
@@ -121,7 +121,7 @@ Use MuJoCo simulation with the same `so_arm101.yaml` contract.
 3. Start rosetta recorder: `pixi run rosetta-record-mujoco`
 4. Start keyboard controller (new terminal): `ros2 run rosetta episode_keyboard_node`
 5. Press `t` to set a prompt, `r` to start recording
-6. Move the arm: `$(ros2 pkg prefix pai_data_collection)/share/pai_data_collection/scripts/arm_demo_positions.sh` (or `ros2 topic pub`; MuJoCo must already be running from step 2)
+6. Move the arm: `$(ros2 pkg prefix pai_data_collection_rosseta)/share/pai_data_collection_rosseta/scripts/arm_demo_positions.sh` (or `ros2 topic pub`; MuJoCo must already be running from step 2)
 7. Press `s` to save or `d` to discard the episode
 
 ## Convert Rosbag to LeRobot
@@ -144,14 +144,14 @@ Run conversion (Gazebo bags use `datasets/so_arm101/bags`; MuJoCo bags use `data
 # Gazebo
 python -m rosetta.port_bags \
     --raw-dir datasets/so_arm101/bags \
-    --contract $(ros2 pkg prefix pai_data_collection)/share/pai_data_collection/config/rosetta/so_arm101.yaml \
+    --contract $(ros2 pkg prefix pai_data_collection_rosseta)/share/pai_data_collection_rosseta/config/rosetta/so_arm101.yaml \
     --repo-id move_arm \
     --root datasets_lerobot
 
 # MuJoCo
 python -m rosetta.port_bags \
     --raw-dir datasets/so_arm101_mujoco/bags \
-    --contract $(ros2 pkg prefix pai_data_collection)/share/pai_data_collection/config/rosetta/so_arm101.yaml \
+    --contract $(ros2 pkg prefix pai_data_collection_rosseta)/share/pai_data_collection_rosseta/config/rosetta/so_arm101.yaml \
     --repo-id move_arm_mujoco \
     --root datasets_lerobot
 ```

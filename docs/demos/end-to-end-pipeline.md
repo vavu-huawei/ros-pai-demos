@@ -55,7 +55,7 @@ All backends publish the **same ROS 2 topics** (`/joint_states`, `/forward_posit
 
 A Rosetta contract is a YAML file that defines the mapping between ROS 2 topics and LeRobot dataset features. It tells Rosetta what to record, how to convert units, and where to publish actions during inference.
 
-The SO-ARM101 contract lives at `pai_data_collection/config/rosetta/so_arm101.yaml`:
+The SO-ARM101 contract lives at `pai_data_collection_rosseta/config/rosetta/so_arm101.yaml`:
 
 | ROS 2 Side                                                    |     | LeRobot Side                |
 | ------------------------------------------------------------- | --- | --------------------------- |
@@ -81,7 +81,7 @@ Recording captures rosbags of demonstration episodes through the Rosetta episode
 2. **Start the robot** — simulation or real hardware.
 3. **Start the episode recorder** — points to the contract and an output directory for bags.
 4. **For each episode:**
-   a. Reset the scene — send the arm to its home pose. In Gazebo sim, if your task involves the cubes in the `pai_world` scene, you can additionally reset their positions via the [data-collection workflow](../../pai_data_collection/README.md#workflow) helper (`gz_set_cubes_poses.py`, supports `--random` for variety).
+   a. Reset the scene — send the arm to its home pose. In Gazebo sim, if your task involves the cubes in the `pai_world` scene, you can additionally reset their positions via the [data-collection workflow](../../pai_data_collection_rosseta/README.md#workflow) helper (`gz_set_cubes_poses.py`, supports `--random` for variety).
    b. Start recording (`r` key in the keyboard controller, or via the `/episode_recorder/record_episode` action).
    c. Perform the task — via leader teleop, scripted commands, or any other method.
    d. Stop recording (`s` to save, `d` to discard and re-record).
@@ -92,7 +92,7 @@ The commands:
 ```bash
 # Terminal 1: Start the episode recorder (works with any backend)
 ros2 launch rosetta episode_recorder_launch.py \
-    contract_path:=$(ros2 pkg prefix pai_data_collection)/share/pai_data_collection/config/rosetta/so_arm101.yaml \
+    contract_path:=$(ros2 pkg prefix pai_data_collection_rosseta)/share/pai_data_collection_rosseta/config/rosetta/so_arm101.yaml \
     bag_base_dir:=<output_directory>
 
 # Terminal 2: Start the keyboard controller
@@ -142,7 +142,7 @@ After recording, convert the rosbags into a LeRobot dataset using `rosetta.port_
 ```bash
 python -m rosetta.port_bags \
     --raw-dir <path_to_bags> \
-    --contract $(ros2 pkg prefix pai_data_collection)/share/pai_data_collection/config/rosetta/so_arm101.yaml \
+    --contract $(ros2 pkg prefix pai_data_collection_rosseta)/share/pai_data_collection_rosseta/config/rosetta/so_arm101.yaml \
     --repo-id <dataset_name> \
     --root <datasets_directory>
 ```
@@ -153,7 +153,7 @@ python -m rosetta.port_bags \
 > ```bash
 > python -m rosetta.port_bags \
 >     --raw-dir <path_to_bags> \
->     --contract $(ros2 pkg prefix pai_data_collection)/share/pai_data_collection/config/rosetta/so_arm101.yaml \
+>     --contract $(ros2 pkg prefix pai_data_collection_rosseta)/share/pai_data_collection_rosseta/config/rosetta/so_arm101.yaml \
 >     --repo-id <hf_user>/<dataset_name> \
 >     --push-to-hub
 > ```
@@ -229,7 +229,7 @@ Uses the [`lerobot_robot_rosetta`](https://github.com/iblnkn/lerobot-robot-roset
 ```bash
 lerobot-replay \
     --robot.type=rosetta \
-    --robot.config_path=$(ros2 pkg prefix pai_data_collection)/share/pai_data_collection/config/rosetta/so_arm101.yaml \
+    --robot.config_path=$(ros2 pkg prefix pai_data_collection_rosseta)/share/pai_data_collection_rosseta/config/rosetta/so_arm101.yaml \
     --dataset.repo_id=<dataset_name> \
     --dataset.root=<datasets_directory>/<dataset_name> \
     --dataset.episode=0
@@ -263,7 +263,7 @@ The `rosetta_client_node` wraps LeRobot's inference pipeline in a ROS 2 action s
 ```bash
 # Launch the Rosetta client
 ros2 launch rosetta rosetta_client_launch.py \
-    contract_path:=$(ros2 pkg prefix pai_data_collection)/share/pai_data_collection/config/rosetta/so_arm101.yaml \
+    contract_path:=$(ros2 pkg prefix pai_data_collection_rosseta)/share/pai_data_collection_rosseta/config/rosetta/so_arm101.yaml \
     pretrained_name_or_path:=<path_to_checkpoint> \
     policy_type:=<policy_type> \
     policy_device:=cuda
@@ -312,7 +312,7 @@ pixi run so-arm-gz
 
 ```bash
 ros2 launch rosetta episode_recorder_launch.py \
-    contract_path:=$(ros2 pkg prefix pai_data_collection)/share/pai_data_collection/config/rosetta/so_arm101.yaml \
+    contract_path:=$(ros2 pkg prefix pai_data_collection_rosseta)/share/pai_data_collection_rosseta/config/rosetta/so_arm101.yaml \
     bag_base_dir:=datasets/so_arm101/bags
 ```
 
@@ -391,7 +391,7 @@ Watch the robot — it should reproduce the forward motion. If anything looks of
 ```bash
 python -m rosetta.port_bags \
     --raw-dir datasets/so_arm101/bags \
-    --contract $(ros2 pkg prefix pai_data_collection)/share/pai_data_collection/config/rosetta/so_arm101.yaml \
+    --contract $(ros2 pkg prefix pai_data_collection_rosseta)/share/pai_data_collection_rosseta/config/rosetta/so_arm101.yaml \
     --repo-id move_arm \
     --root datasets_lerobot
 ```
@@ -420,7 +420,7 @@ lerobot-train \
 
 ```bash
 ros2 launch rosetta rosetta_client_launch.py \
-    contract_path:=$(ros2 pkg prefix pai_data_collection)/share/pai_data_collection/config/rosetta/so_arm101.yaml \
+    contract_path:=$(ros2 pkg prefix pai_data_collection_rosseta)/share/pai_data_collection_rosseta/config/rosetta/so_arm101.yaml \
     pretrained_name_or_path:=outputs/train/act_move_arm/checkpoints/last/pretrained_model \
     policy_type:=act \
     policy_device:=cuda

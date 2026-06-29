@@ -1,0 +1,19 @@
+# pai_data_collection ROS 2 Parameters Configuration
+/data_collector:
+  ros__parameters:
+    # List of topics to record
+    # Format: array of topic names
+    topics:
+      - /camera/image_raw
+      - /camera/camera_info
+      - /imu/data
+      - /lidar/scan
+      - /odom
+
+    # Output directory path where MCAP file will be saved
+    # The directory will be created if it doesn't exist
+    bag_path: /tmp/ros_bags
+
+    # Output file name (without .mcap extension)
+    # The final file will be named: {bag_name}.mcap
+    bag_name: recording_session_001

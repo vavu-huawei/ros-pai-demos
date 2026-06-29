@@ -49,7 +49,7 @@ Full documentation lives in [`docs/`](docs/README.md). Highlights:
 | **pai_leader_teleop**   | Leader-follower teleoperation — brings up a physical leader SO-ARM101 to control a follower arm via ros2_control                                               |
 | **pai_rviz_teleop**     | Interactive-marker differential IK teleoperation in RViz                                                                                                       |
 | **pai_phone_teleop**    | Phone-based 6-DoF pose teleoperation over WebXR                                                                                                                |
-| **pai_data_collection** | Configuration and scripts for collecting demonstration datasets via the Rosetta ROS 2–LeRobot bridge                                                           |
+| **pai_data_collection_rosseta** | Configuration and scripts for collecting demonstration datasets via the Rosetta ROS 2–LeRobot bridge                                                           |
 | **pai_description**     | Scene-level SDF world definitions — single source of truth for both Gazebo (loaded natively) and MuJoCo (converted to MJCF at launch time via `sdformat_mjcf`) |
 | **pai_assets**          | Shared 3D model assets (meshes, textures) used by the demo scenes                                                                                              |
 

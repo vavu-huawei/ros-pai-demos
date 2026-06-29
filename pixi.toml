@@ -46,7 +46,7 @@ rosetta-record-mujoco = { cmd = [
   "launch",
   "rosetta",
   "episode_recorder_launch.py",
-  "contract_path:=$(ros2 pkg prefix pai_data_collection)/share/pai_data_collection/config/rosetta/so_arm101.yaml",
+  "contract_path:=$(ros2 pkg prefix pai_data_collection_rosseta)/share/pai_data_collection_rosseta/config/rosetta/so_arm101.yaml",
   "bag_base_dir:=datasets/so_arm101_mujoco/bags",
 ] }
 test-joints = { cmd = [
@@ -101,7 +101,7 @@ ros-kilted-robot-state-publisher = "*"
 ros-kilted-ros-gz-bridge = "*"
 ros-kilted-ros-gz-sim = "*"
 ros-kilted-ros2controlcli = "*"
-# From pai_data_collection
+# From pai_data_collection_rosseta
 ros-kilted-rosbag2 = ">=0.32.0,<0.33"
 ros-kilted-rosbag2-py = "*"
 ros-kilted-rosbag2-storage-mcap = ">=0.32.0,<0.33"
